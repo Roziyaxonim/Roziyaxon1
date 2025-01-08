@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Proficiency Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Language Proficiency Predictor</h1>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" placeholder="Enter your age" required>
+        </div>
+        <div class="form-group">
+            <label for="learning_method">Learning Method:</label>
+            <select id="learning_method" required>
+                <option value="0">Online Courses</option>
+                <option value="1">Language Exchange</option>
+                <option value="2">Textbooks</option>
+                <option value="3">Immersion</option>
+                <option value="4">Private Tutor</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="language">Language:</label>
+            <select id="language" required>
+                <option value="0">English</option>
+                <option value="1">Spanish</option>
+                <option value="2">German</option>
+                <option value="3">French</option>
+                <option value="4">Chinese</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="learning_time">Learning Time Per Week (hours):</label>
+            <input type="number" id="learning_time" placeholder="Enter hours per week" required>
+        </div>
+        <div class="form-group">
+            <label for="duration">Learning Duration (months):</label>
+            <input type="number" id="duration" placeholder="Enter duration in months" required>
+        </div>
+        <div class="form-group">
+            <label for="resources_used">Resources Used:</label>
+            <select id="resources_used" required>
+                <option value="0">Online</option>
+                <option value="1">Books</option>
+                <option value="2">Apps</option>
+                <option value="3">Online & Books</option>
+                <option value="4">Online & Apps</option>
+            </select>
+        </div>
+        <button onclick="predict()">Predict Proficiency</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function predict() {
+            const age = parseInt(document.getElementById('age').value);
+            const learningMethod = parseInt(document.getElementById('learning_method').value);
+            const language = parseInt(document.getElementById('language').value);
+            const learningTime = parseInt(document.getElementById('learning_time').value);
+            const duration = parseInt(document.getElementById('duration').value);
+            const resourcesUsed = parseInt(document.getElementById('resources_used').value);
+
+            if (isNaN(age) || isNaN(learningMethod) || isNaN(language) || isNaN(learningTime) || isNaN(duration) || isNaN(resourcesUsed)) {
+                document.getElementById('result').innerText = "Please fill in all fields correctly.";
+                return;
+            }
+
+            // Mock prediction logic (replace with your own algorithm if needed)
+            const score = (learningTime * duration + age) % 5 + 1; // Simple prediction formula
+
+            const proficiencyMap = {
+                1: "Beginner",
+                2: "Intermediate",
+                3: "Advanced",
+                4: "Proficient",
+                5: "Fluent"
+            };
+
+            const prediction = proficiencyMap[score] || "Unknown proficiency level";
+            document.getElementById('result').innerText = `Predicted Proficiency Level: ${prediction}`;
+        }
+    </script>
+</body>
+</html>
